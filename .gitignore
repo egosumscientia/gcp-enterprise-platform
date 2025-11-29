@@ -1,0 +1,47 @@
+### TERRAFORM ###
+# Carpetas locales
+.terraform/
+.terraform.tfstate.lock.info
+
+# Archivos de estado
+*.tfstate
+*.tfstate.backup
+
+# Archivos de salida o planes
+*.tfplan
+*.tfvars
+*.tfvars.json
+
+# No subir locks generados localmente
+.terraform.lock.hcl
+
+# Modules descargados
+terraform.tfstate.d/
+
+### SENSITIVE FILES ###
+# Claves SSH
+*.pem
+*.key
+*.pub
+id_ed25519
+id_ed25519.pub
+
+# Credenciales
+*.creds
+*.secret
+*.json
+
+### VSCODE ###
+.vscode/
+.history/
+*.code-workspace
+
+### WINDOWS ###
+Thumbs.db
+Desktop.ini
+
+### GENERAL ###
+*.log
+*.tmp
+*.bak
+*.swp
