@@ -1,0 +1,18 @@
+# Redes VPC y subredes
+gcloud compute networks list
+gcloud compute networks subnets list
+
+# Instancias y discos
+gcloud compute instances list
+gcloud compute disks list
+
+# Load Balancer
+gcloud compute backend-services list
+gcloud compute forwarding-rules list
+gcloud compute health-checks list
+
+# Instance Groups (MIG)
+gcloud compute instance-groups managed list
+
+# Reglas de firewall
+gcloud compute firewall-rules list
