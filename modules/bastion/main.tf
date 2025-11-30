@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------
-# Bastion Host sin IP pública, acceso solo mediante IAP
+# Bastion Host con IP pública
 # ----------------------------------------------------------------------
 
 resource "google_compute_instance" "bastion" {
@@ -19,10 +19,12 @@ resource "google_compute_instance" "bastion" {
     }
   }
 
-  # Interfaz de red SIN IP pública
+  # Interfaz de red CON IP pública efímera
   network_interface {
     subnetwork = var.subnet_self_link
-    # Sin access_config => NO hay IP pública
+
+    # Este bloque crea la IP pública automáticamente
+    access_config {}
   }
 
   # Service Account con permisos mínimos

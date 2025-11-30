@@ -7,6 +7,23 @@ resource "google_compute_instance_template" "template" {
   machine_type = var.machine_type
   region       = var.region
 
+  metadata_startup_script = <<-EOT
+    #!/bin/bash
+
+    # Crear usuario SSH local porque Ubuntu 22.04 en GCP no crea ninguno por defecto sin OS Login
+    useradd -m -s /bin/bash ubuntu || true
+    mkdir -p /home/ubuntu/.ssh
+    chmod 700 /home/ubuntu/.ssh
+    chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+
+    # Instalar NGINX (tu config original)
+    apt-get update -y
+    apt-get install -y nginx
+    echo "<h1>Enterprise LB OK</h1>" > /var/www/html/index.html
+    systemctl enable nginx
+    systemctl start nginx
+  EOT
+
   tags = ["monolith-app"]
 
   disk {
@@ -30,6 +47,7 @@ resource "google_compute_instance_template" "template" {
     create_before_destroy = true
   }
 }
+
 
 # ----------------------------------------------------------------------
 # Instance Group Manager (IGM)

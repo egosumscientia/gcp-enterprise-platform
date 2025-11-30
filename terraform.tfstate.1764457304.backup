@@ -1,0 +1,111 @@
+{
+  "version": 4,
+  "terraform_version": "1.13.5",
+  "serial": 90,
+  "lineage": "1253446a-5ff9-4e31-254b-3d974f4d53ee",
+  "outputs": {},
+  "resources": [
+    {
+      "module": "module.sql",
+      "mode": "managed",
+      "type": "google_compute_global_address",
+      "name": "private_sql_range",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": "10.243.228.0",
+            "address_type": "INTERNAL",
+            "creation_timestamp": "2025-11-29T14:40:34.780-08:00",
+            "description": "",
+            "effective_labels": {},
+            "id": "projects/gcp-enterprise-platform/global/addresses/mysql-enterprise-private-range",
+            "ip_version": "",
+            "label_fingerprint": "42WmSpB8rSM=",
+            "labels": {},
+            "name": "mysql-enterprise-private-range",
+            "network": "https://www.googleapis.com/compute/v1/projects/gcp-enterprise-platform/global/networks/enterprise-vpc",
+            "prefix_length": 24,
+            "project": "gcp-enterprise-platform",
+            "purpose": "VPC_PEERING",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/gcp-enterprise-platform/global/addresses/mysql-enterprise-private-range",
+            "terraform_labels": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "module.vpc.google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sql",
+      "mode": "managed",
+      "type": "google_service_networking_connection",
+      "name": "private_vpc_connection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "deletion_policy": null,
+            "id": "https%3A%2F%2Fwww.googleapis.com%2Fcompute%2Fv1%2Fprojects%2Fgcp-enterprise-platform%2Fglobal%2Fnetworks%2Fenterprise-vpc:servicenetworking.googleapis.com",
+            "network": "https://www.googleapis.com/compute/v1/projects/gcp-enterprise-platform/global/networks/enterprise-vpc",
+            "peering": "servicenetworking-googleapis-com",
+            "reserved_peering_ranges": [
+              "mysql-enterprise-private-range"
+            ],
+            "service": "servicenetworking.googleapis.com",
+            "timeouts": null,
+            "update_on_creation_fail": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "module.sql.google_compute_global_address.private_sql_range",
+            "module.vpc.google_compute_network.vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.vpc",
+      "mode": "managed",
+      "type": "google_compute_network",
+      "name": "vpc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "auto_create_subnetworks": false,
+            "delete_default_routes_on_create": false,
+            "description": "",
+            "enable_ula_internal_ipv6": false,
+            "gateway_ipv4": "",
+            "id": "projects/gcp-enterprise-platform/global/networks/enterprise-vpc",
+            "internal_ipv6_range": "",
+            "mtu": 0,
+            "name": "enterprise-vpc",
+            "network_firewall_policy_enforcement_order": "AFTER_CLASSIC_FIREWALL",
+            "numeric_id": "8916293749559445667",
+            "project": "gcp-enterprise-platform",
+            "routing_mode": "REGIONAL",
+            "self_link": "https://www.googleapis.com/compute/v1/projects/gcp-enterprise-platform/global/networks/enterprise-vpc",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "create_before_destroy": true
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

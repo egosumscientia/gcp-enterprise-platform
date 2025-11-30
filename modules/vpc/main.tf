@@ -29,15 +29,3 @@ resource "google_compute_subnetwork" "private_subnet" {
   private_ip_google_access = true
 }
 
-# -------------------------------------------------------------------
-# Rutas internas (no incluye NAT; NAT se agrega desde módulo NAT)
-# -------------------------------------------------------------------
-resource "google_compute_route" "private_to_public" {
-  name           = "${var.vpc_name}-private-to-public"
-  project        = var.project_id
-  network        = google_compute_network.vpc.name
-  dest_range     = var.public_subnet_cidr
-  next_hop_gateway = "default-internet-gateway"
-  priority       = 1000
-}
-
