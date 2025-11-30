@@ -1,22 +1,26 @@
-# ----------------------------------------------------------------------
-# Instance Template (Ubuntu 22.04 LTS)
-# ----------------------------------------------------------------------
+locals {
+  ubuntu_key = "ubuntu:${file("C:/Users/petor/.ssh/google_compute_engine.pub")}"
+}
+
 resource "google_compute_instance_template" "template" {
+
   name_prefix  = var.instance_name_prefix
   project      = var.project_id
   machine_type = var.machine_type
   region       = var.region
 
+  metadata = {
+    enable-oslogin = "FALSE"
+    ssh-keys       = local.ubuntu_key
+  }
+
   metadata_startup_script = <<-EOT
     #!/bin/bash
-
-    # Crear usuario SSH local porque Ubuntu 22.04 en GCP no crea ninguno por defecto sin OS Login
     useradd -m -s /bin/bash ubuntu || true
     mkdir -p /home/ubuntu/.ssh
     chmod 700 /home/ubuntu/.ssh
     chown -R ubuntu:ubuntu /home/ubuntu/.ssh
 
-    # Instalar NGINX (tu config original)
     apt-get update -y
     apt-get install -y nginx
     echo "<h1>Enterprise LB OK</h1>" > /var/www/html/index.html
@@ -35,7 +39,7 @@ resource "google_compute_instance_template" "template" {
   }
 
   network_interface {
-    subnetwork   = var.private_subnet_self_link
+    subnetwork = var.private_subnet_self_link
   }
 
   service_account {
