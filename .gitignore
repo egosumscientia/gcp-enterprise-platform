@@ -45,3 +45,10 @@ Desktop.ini
 *.tmp
 *.bak
 *.swp
+
+# Ignorar backups de Terraform
+terraform.tfstate*.backup
+# Ignorar estados de Terraform
+terraform.tfstate
+terraform.tfstate.*
+
